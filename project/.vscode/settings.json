@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "stdio.h": "c",
+        "fstream": "c",
+        "istream": "c",
+        "ostream": "c",
+        "sstream": "c",
+        "stddef.h": "c"
+    },
+    "C_Cpp.dimInactiveRegions": false
+}
