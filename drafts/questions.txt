@@ -1,0 +1,7 @@
+1) Какой тип вывода в .mode 
+    http://sqlite.awardspace.info/syntax/sqlitepg10.htm https://www.oreilly.com/library/view/using-sqlite/9781449394592/re63.html
+
+2) Создаем отдельную таблицу для списка категорий слов? 
+    Поля: id, имя категории, количество слов в категории, флаг категории
+
+3) как выполнять запросы?
