@@ -6,6 +6,7 @@
 #include <database.h>
 #include <sql_queries.h>
 
+namespace database {
 bool createDB(const char * pathname) {
 	sqlite3* db;
 	
@@ -53,17 +54,19 @@ int insertInitialWordsCategs(const char * pathname) {
   char * catgs_message_error;
 
 
-  if (sqlite3_open(pathname, &db) != SQLITE_OK)
+  if (sqlite3_open(pathname, &db) != SQLITE_OK) {
     std::cerr << "Error in insertInitialWordsCategs func: sqlite_open error" << std::endl;
 		return DB_FUNC_ERR_OPEN;
+  }
 
   int result_words = sqlite3_exec(db, sql_initial_insert_words, NULL, 0, &words_message_error);
   int result_catgs = sqlite3_exec(db, sql_initial_insert_categories, NULL, 0, &catgs_message_error);
 
-	if (sqlite3_close(db) != SQLITE_OK)
+	if (sqlite3_close(db) != SQLITE_OK) {
 		std::cerr << "Error in insertInitialWordsCategs func: sqlite_close error" << std::endl;
 		return DB_FUNC_ERR_CLOSE;
-
+  }
+  
 	if (result_catgs != SQLITE_OK && result_words != SQLITE_OK) {
 		std::cerr << "Error in insertInitialWordsCategs func sqlite_exec error" << std::endl;
 		sqlite3_free(words_message_error);
@@ -77,3 +80,18 @@ int insertInitialWordsCategs(const char * pathname) {
 		return DB_FUNC_CODE_SUCCESS;
 	}
 }
+
+ManagerDB::ManagerDB(const char* pathname) {
+  if (sqlite3_open(pathname, &db_) != SQLITE_OK)
+    std::cerr << "Error in managerDB constructor: sqlite_open error" << std::endl;
+}
+
+ManagerDB::~ManagerDB() {
+  if (sqlite3_close(db_) != SQLITE_OK)
+		std::cerr << "Error in managerDB destructor: sqlite_close error" << std::endl;
+}
+
+int ManagerDB::signUp(std::string login, std::string password) {
+  
+}
+} // namespace database
